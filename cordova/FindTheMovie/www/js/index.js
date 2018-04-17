@@ -19,58 +19,28 @@
 var app = {
     // Application Constructor
     initialize: function() {
-        this.bindEvents();
-        init();
+        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
 
-    bindEvents: function() { 
-        document.addEventListener('deviceready', this.onDeviceReady, false); 
-    },
-
+    // deviceready Event Handler
+    //
+    // Bind any cordova events here. Common events are:
+    // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        init();
-
-        app.receivedEvent('deviceready');
-
+        this.receivedEvent('deviceready');
     },
 
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+
         console.log('Received Event: ' + id);
     }
 };
 
 app.initialize();
-
-
-function init(){//load list by popularity
-    
-    var theList = $("#popular");
-    
-    var api='';
-     var request = $.ajax({
-          url: "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key="+api,
-          method: "GET"
-        });
-
-        request.done(function( moviesList ) {
-            
-            for (i=0;i<9;i++){
-                theList.append(`<md-card>
-                  <md-card-media>
-                    <img src="http://image.tmdb.org/t/p/w342//` + moviesList.results[i].poster_path + `" alt="Poster">
-                  </md-card-media>
-
-                  <md-card-header>
-                    <div class="md-title">`+ moviesList.results[i].original_title +`</div>
-                  </md-card-header>
-                </md-card>`);
-                }
-            
-            
-            
-            });
-        request.fail(function( jqXHR, textStatus ) {
-          alert( "Request failed: " + textStatus );
-    });
-}

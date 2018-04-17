@@ -19,73 +19,28 @@
 var app = {
     // Application Constructor
     initialize: function() {
-        this.bindEvents();
-        init();
+        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
 
-    bindEvents: function() { 
-        document.addEventListener('deviceready', this.onDeviceReady, false); 
-    },
-
+    // deviceready Event Handler
+    //
+    // Bind any cordova events here. Common events are:
+    // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        init();
-
-        app.receivedEvent('deviceready');
-
+        this.receivedEvent('deviceready');
     },
 
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+
         console.log('Received Event: ' + id);
     }
 };
 
 app.initialize();
-
-var db;
-var mov=[];
-
-
-function init(){//load list by popularity
-    /*for (i=0;i<9;i++){
-                theList.append(`<md-card>
-                  <md-card-media>
-                    <img src="http://image.tmdb.org/t/p/w342//` + moviesList.results[i].poster_path + `" alt="Poster">
-                  </md-card-media>
-
-                  <md-card-header>
-                    <div class="md-title">`+ api +`</div>
-                  </md-card-header>
-                </md-card>`);
-                  //theList.append( "<li><a href='#' class='movie' onclick='goToPageThree(" + moviesList.results[i].id + ",0);'><img class='poster' src='http://image.tmdb.org/t/p/w342//" + moviesList.results[i].poster_path + "'>" + moviesList.results[i].original_title + "</a></li>");
-                }*/
-    var theList = $("#popular");
-    
-    var api='2e0b88a584333cb7ce48d309f7c10dd7';
-     var request = $.ajax({
-          url: "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key="+api,
-          method: "GET"
-        });
-
-        request.done(function( moviesList ) {
-            
-            for (i=0;i<9;i++){
-                theList.append(`<md-card>
-                  <md-card-media>
-                    <img src="http://image.tmdb.org/t/p/w342//` + moviesList.results[i].poster_path + `" alt="Poster">
-                  </md-card-media>
-
-                  <md-card-header>
-                    <div class="md-title">`+ moviesList.results[i].original_title +`</div>
-                  </md-card-header>
-                </md-card>`);
-                  //theList.append( "<li><a href='#' class='movie' onclick='goToPageThree(" + moviesList.results[i].id + ",0);'><img class='poster' src='http://image.tmdb.org/t/p/w342//" + moviesList.results[i].poster_path + "'>" + moviesList.results[i].original_title + "</a></li>");
-                }
-            
-            //theList.listview("refresh");
-            
-            });
-        request.fail(function( jqXHR, textStatus ) {
-          alert( "Request failed: " + textStatus );
-    });
-}
