@@ -1,57 +1,91 @@
-<!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
+<!doctype html>
 <html>
-    <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <script type="text/javascript" src="js/vue.js"></script>
-        <title>Find The Movie</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Find The Movie</h1>
-            <div id="app">
-              {{ message }}
-            </div>
-        </div>
-        <script type="text/javascript">
-            var app = new Vue({
-              el: '#app',
-              data: {
-                message: 'Hello Vue!'
-              }
-            })
-        </script>
-        <script type="text/javascript" src="cordova.js"></script>
+  <head>
+   
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;font-src 'self' 'unsafe-inline' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+		
+    <link rel="stylesheet" href="libs/roboto.css">
+    <link rel="stylesheet" href="libs/vuematerial.css">
+    <link rel="stylesheet" href="libs/vuethemedefault.css">
+    <link rel="stylesheet" href="css/estils.css">
+    
+      
+      
+      <!--<script src="js/components/mail_list.js"></script>-->
+    <!--<script src="js/components/mail_item.js"></script>-->
+    
+      
+  </head>
+
+  <body onload="init()">
+    <div  class="app-viewport" id="app">
+        
+        
+        
+        <md-toolbar class="md-transparent" md-elevation="0"> <!-- inicio toolbar de la app-->
+            <md-button class="md-icon-button" @click="showNavigation = true">
+                <md-icon>menu</md-icon>
+            </md-button>
+        </md-toolbar> <!-- fin toolbar de la app-->
+        
+        <md-drawer :md-active.sync="showNavigation" ref="sidebar"> <!-- inicio panel lateral-->
+              <md-toolbar class="md-primary" md-elevation="0">
+                <span class="md-title">Find The Movie</span>
+              </md-toolbar>
+
+              <md-list>
+                <md-list-item @click="goToFind()">
+                  <md-icon>search</md-icon>
+                  <span class="md-list-item-text">Search Movie</span>
+                </md-list-item>
+
+                <md-list-item @click="goToSimpleList()">
+                  <md-icon>movie_filter</md-icon>
+                  <span class="md-list-item-text">Favorite Movies</span>
+                </md-list-item>
+             
+
+              <md-list-item @click="goToSettings()">
+                  <md-icon>local_movies</md-icon>
+                  <span class="md-list-item-text">Nearby Cinemas</span>
+                </md-list-item>
+              </md-list>
+        </md-drawer> <!-- fin panel lateral-->
+      
+    
+      
+      <main class="main-content"> <!-- aqui el router inyecta las paginas-->
+                       <div>
+                          <router-view></router-view>
+                        </div>
+                      
+        </main>
+
+    </div>
+    <div id="bottom-bar">
+      <md-bottom-bar md-sync-route md-type="fixed">
+        <md-bottom-bar-item id="bottom-bar-item-home" md-label="Search" md-icon="search"></md-bottom-bar-item>
+        <md-bottom-bar-item id="bottom-bar-item-pages" md-label="Favorite" md-icon="movie_filter"></md-bottom-bar-item>
+        <md-bottom-bar-item id="bottom-bar-item-posts" md-label="Cinemas" md-icon="Nearby Cinemas"></md-bottom-bar-item>
+      </md-bottom-bar>
+    </div>
+		<script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-    </body>
+		
+		<script src="libs/vue.js"></script>
+		<script src="js/vue-router.js"></script>
+		<script src="libs/vuematerial.js"></script>
+		<script src="js/components/simple_list.js"></script>
+		<script src="js/components/settings.js"></script>
+    <script src="js/components/find.js"></script>
+		<script src="js/main.js"></script>
+  </body>
 </html>
+
+
+
+
+

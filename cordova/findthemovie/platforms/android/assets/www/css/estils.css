@@ -1,0 +1,11 @@
+#main{
+	text-align: center;
+}
+
+#main>.md-field{
+	width: 50%;
+	margin: auto;
+}
+#fimage{
+	margin-top: 50px;
+}
