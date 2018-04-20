@@ -2,12 +2,15 @@
 	text-align: center;
 }
 
-#main>.md-field{
-	width: 50%;
-	margin: auto;
-}
+
 #fimage{
-	margin-top: 50px;
+	margin-top: 15px;
+}
+
+.maintitle{
+	margin-top: 60px;
+	font-size: 2em;
+	line-height: 1.3em;
 }
 
 #bottom-bar{
@@ -15,6 +18,7 @@
 	height: 50px;
 	position: fixed;
 	bottom: 0px;
+	z-index: 999;
 }
 
 #bottom-bar>md-bottom-bar{
@@ -24,4 +28,68 @@
 
 md-bottom-bar-item{
 	width: 33vw;
+}
+
+#searchfield{
+	height: 70px;
+	overflow: hidden;
+	margin-top: 20px;
+	width: 100%;
+	display: inline-block;
+}
+
+#searchfield>.search{
+	margin: auto;
+	margin-top: 16px;
+	display: inline-block;
+}
+
+#searchfield>.md-field{
+	width: 50%;
+	margin: auto;
+	display: inline-block;
+}
+
+#popularmovies{
+	text-align: left;
+	margin-top: 60px;
+}
+
+#popularmovies>p{
+	margin: 2px;
+	margin-left: 6px;
+}
+
+#popularlist{
+	text-align: center;
+	width: auto;
+	height: 220px;
+	overflow: auto;
+	white-space: nowrap;
+	margin-bottom: 50px;
+}
+
+#popularlist>.md-card{
+	vertical-align: top;
+	display: inline-block;
+	width: 110px;
+	height: 210px;
+	margin-left: 3px;
+	margin-right: 2px;
+}
+#popularlist .md-title{
+	max-height: 37px;
+	height: auto;
+	white-space: pre-wrap;
+	display: inline-block;
+	vertical-align: middle;
+	text-overflow: ellipsis;
+	font-size: 14px;
+	line-height: 18px;
+	margin: auto;
+	margin-top: 3px;
+}
+
+#popularlist .md-card-header{
+	padding: 2px;
 }

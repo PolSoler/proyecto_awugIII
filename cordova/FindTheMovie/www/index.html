@@ -2,7 +2,7 @@
 <html>
   <head>
    
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;font-src 'self' 'unsafe-inline' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.themoviedb.org data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' http://image.tmdb.org data: content:;font-src 'self' 'unsafe-inline' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -11,12 +11,8 @@
     <link rel="stylesheet" href="libs/vuematerial.css">
     <link rel="stylesheet" href="libs/vuethemedefault.css">
     <link rel="stylesheet" href="css/estils.css">
-    
+    <script src="libs/jquery-2.1.0.min.js"></script>
       
-      
-      <!--<script src="js/components/mail_list.js"></script>-->
-    <!--<script src="js/components/mail_item.js"></script>-->
-    
       
   </head>
 
@@ -24,14 +20,14 @@
     <div  class="app-viewport" id="app">
         
         
-        
-        <md-toolbar class="md-transparent" md-elevation="0"> <!-- inicio toolbar de la app-->
+        <!--
+        <md-toolbar class="md-transparent" md-elevation="0"> 
             <md-button class="md-icon-button" @click="showNavigation = true">
                 <md-icon>menu</md-icon>
             </md-button>
-        </md-toolbar> <!-- fin toolbar de la app-->
+        </md-toolbar>
         
-        <md-drawer :md-active.sync="showNavigation" ref="sidebar"> <!-- inicio panel lateral-->
+        <md-drawer :md-active.sync="showNavigation" ref="sidebar"> 
               <md-toolbar class="md-primary" md-elevation="0">
                 <span class="md-title">Find The Movie</span>
               </md-toolbar>
@@ -53,10 +49,17 @@
                   <span class="md-list-item-text">Nearby Cinemas</span>
                 </md-list-item>
               </md-list>
-        </md-drawer> <!-- fin panel lateral-->
+        </md-drawer> -->
       
     
-      
+      <div id="bottom-bar">
+      <md-bottom-bar md-sync-route md-type="shift">
+        <md-bottom-bar-item  class="orange" id="bottom-bar-item-home" md-label="Search" md-icon="search" @click="goToFind()"></md-bottom-bar-item>
+        <md-bottom-bar-item class="orange" id="bottom-bar-item-pages" md-label="Favorite" md-icon="favorite" @click="goToSimpleList()"></md-bottom-bar-item>
+        <md-bottom-bar-item class="orange" id="bottom-bar-item-posts" md-label="Cinemas" md-icon="local_movies" @click="goToSettings()"></md-bottom-bar-item>
+      </md-bottom-bar>
+    </div>
+
       <main class="main-content"> <!-- aqui el router inyecta las paginas-->
                        <div>
                           <router-view></router-view>
@@ -65,16 +68,9 @@
         </main>
 
     </div>
-    <div id="bottom-bar">
-      <md-bottom-bar md-sync-route md-type="fixed">
-        <md-bottom-bar-item id="bottom-bar-item-home" md-label="Search" md-icon="search"></md-bottom-bar-item>
-        <md-bottom-bar-item id="bottom-bar-item-pages" md-label="Favorite" md-icon="movie_filter"></md-bottom-bar-item>
-        <md-bottom-bar-item id="bottom-bar-item-posts" md-label="Cinemas" md-icon="Nearby Cinemas"></md-bottom-bar-item>
-      </md-bottom-bar>
-    </div>
-		<script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-		
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/apikey.js"></script>
 		<script src="libs/vue.js"></script>
 		<script src="js/vue-router.js"></script>
 		<script src="libs/vuematerial.js"></script>
