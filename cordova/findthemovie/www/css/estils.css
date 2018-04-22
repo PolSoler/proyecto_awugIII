@@ -109,7 +109,7 @@ md-bottom-bar-item{
 	display: block;
 }
 
-#favbutton{
+.favbutton{
 	margin-top: -27px;
 	float: right;
 	margin-right: 10%;
@@ -171,4 +171,37 @@ md-bottom-bar-item{
 		padding-top: 15px;
 		margin-top: 15px;
 	}
+}
+
+#favlist{
+	width: 100%;
+	height: auto;
+}
+
+#favlist .md-card{
+	vertical-align: top;
+	display: inline-block;
+	width: 31vw;
+	height: auto;
+	margin-left: 1vw;
+	margin-right: 1vw;
+	margin-top: 10px;
+}
+
+#favlist .mtitle{
+	max-height: 37px;
+	height: auto;
+	white-space: pre-wrap;
+	display: inline-block;
+	vertical-align: middle;
+	text-overflow: ellipsis;
+	font-size: 14px;
+	line-height: 18px;
+	margin: auto;
+	margin-top: 3px;
+}
+
+#favlist .md-card-header{
+	padding: 2px;
+	text-align: center;
 }

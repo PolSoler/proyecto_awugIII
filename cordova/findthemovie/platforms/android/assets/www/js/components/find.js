@@ -7,7 +7,6 @@ const FindTemplate = {props: {},
         },
         methods:{
           getMoviesListAndDrawList: function(){//load list by popularity
-              var theList = $("#popularlist");
               var mo=[];
                var request = $.ajax({
                     url: "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key="+moviedbapi,
@@ -15,28 +14,21 @@ const FindTemplate = {props: {},
                   });
                   request.done(function( moviesList ) {
                       for (i=0;i<9;i++){
-                           /* theList.append( `<md-card md-with-hover>
-                                  <md-ripple>
-                                    <md-card-media>
-                                      <img class='poster' src='http://image.tmdb.org/t/p/w342//` + moviesList.results[i].poster_path + `'>
-                                    </md-card-media>
-
-                                    <md-card-header>
-                                      <div class="md-title">` + moviesList.results[i].original_title + `</div>
-                                    </md-card-header>
-                                </md-ripple>
-                              </md-card>
-                              `);*/
-                              //Vue.set(movies[i], 'test','hello');
-                              mo.push({"poster":"http://image.tmdb.org/t/p/w342//"+moviesList.results[i].poster_path, 'title':moviesList.results[i].original_title});
-                               //this.$set(this.movies[i], 'poster', "http://image.tmdb.org/t/p/w342//"+moviesList.results[i].poster_path);
-                               //this.$set(this.movies[i], 'title', moviesList.results[i].original_title);
+                              mo.push({
+                                "id":moviesList.results[i].id,
+                                "poster":"http://image.tmdb.org/t/p/w342//"+moviesList.results[i].poster_path,
+                                'title':moviesList.results[i].original_title
+                              });
                           }
                       });
                   request.fail(function( jqXHR, textStatus ) {
                     alert( "Request failed: " + textStatus );
                   });
                   this.movies=mo;
+              },
+              emitDetail(id){
+                //this.$emit('clicked-show-detail', id);
+                this.$parent.$options.methods.clickedShowDetailModal(id)
               }
               
         },
@@ -66,7 +58,7 @@ const FindTemplate = {props: {},
                 <div id='popularmovies'>
                   <p>Popular Movies</p>
                   <div id="popularlist">
-                      <md-card md-with-hover v-for="movie in movies" >
+                      <md-card md-with-hover v-for="movie in movies" :key="movie.id" @click.native="emitDetail(movie.id)">
                           <md-ripple>
                             <md-card-media>
                               <img class='poster' :src='movie.poster'>
