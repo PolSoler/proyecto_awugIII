@@ -28,7 +28,7 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         
-        
+        init();
         //this.receivedEvent('deviceready');
     },
 

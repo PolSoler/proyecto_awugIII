@@ -35,6 +35,7 @@ function init(){
             ,{path: '/settings', name: 'settings',  component: SettingsTemplate}
             ,{path: '/movie_details:idm', name: 'moviedetails', component: MovieDetailsTemplate}
             ,{path: '/simplelist', name: 'simplelist', component: SimpleListTemplate}
+            ,{path: '/buscar_img', name: 'buscar_img', component: buscar_img}
             
             ];
 
@@ -49,7 +50,9 @@ function init(){
                 showSidepanel: false,
                 movies: [],
                 id: 0,
-                fav: false
+                fav: false,
+                image:'',
+                image_new:''
             },
         methods: {
             goToFind: function(){
@@ -73,6 +76,14 @@ function init(){
                     //console.log("id: "+idm);
                     id=idm;
                     router.push({ name: 'moviedetails', params: {'idm': id}});
+                },
+            goToSearchimg: function(img_src){
+                this.showNavigation = false;
+                    //this.$refs.sidebar.toggle();
+                    //console.log("id: "+idm);
+                    //alert(this.image);
+                    image_new=img_src;
+                    router.push({ name: 'buscar_img', params: {'img_src': image_new}});
                 }
         }
             

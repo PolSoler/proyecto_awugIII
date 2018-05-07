@@ -205,3 +205,18 @@ md-bottom-bar-item{
 	padding: 2px;
 	text-align: center;
 }
+
+.md-dialog{
+	max-width: 90vw;
+	height: auto;
+	display: block;
+	margin: auto;
+}
+.md-dialog .md-button{
+	width: 90%;
+	display: block;
+	margin-left: 5%;
+}
+.md-progress-spinner{
+	margin-top: 20vh;
+}

@@ -2,7 +2,8 @@ const FindTemplate = {props: {},
         data(){
           return{
             type: null,
-            movies:[]
+            movies:[],
+            showDialog: false
           }
         },
         methods:{
@@ -29,6 +30,71 @@ const FindTemplate = {props: {},
               emitDetail(id){
                 //this.$emit('clicked-show-detail', id);
                 this.$parent.$options.methods.clickedShowDetailModal(id)
+              },
+              openCam(){
+                self=this;
+                  var srcType = Camera.PictureSourceType.CAMERA;
+
+                  var options = {
+                      // Some common settings are 20, 50, and 100
+                      quality: 100,                   
+                      targetHeight: 500,
+                      targetWidth: 500,
+                      destinationType: Camera.DestinationType.DATA_URL,
+                      // In this app, dynamically set the picture source, Camera or photo gallery
+                      sourceType: srcType,
+                      encodingType: Camera.EncodingType.JPEG,
+                      mediaType: Camera.MediaType.PICTURE,
+                      allowEdit: false,
+                      correctOrientation: true  //Corrects Android orientation quirks
+                  }
+
+                  //var func = createNewFileEntry;
+
+                  navigator.camera.getPicture(function cameraSuccess(imageData) {
+                      self.image = imageData;
+                      //alert(imageData);
+                      self.$parent.$options.methods.goToSearchimg(imageData);
+                      // You may choose to copy the picture, save it somewhere, or upload.
+                      //func(imageUri);
+
+                  }, function cameraError(error) {
+                      console.debug("Unable to obtain picture: " + error, "app");
+
+                  }, options);
+              }, 
+              openGal(){
+                  self=this;
+                  var srcType = Camera.PictureSourceType.SAVEDPHOTOALBUM;
+
+                  var options = {
+                      // Some common settings are 20, 50, and 100
+                      quality: 100,                   
+                      targetHeight: 500,
+                      targetWidth: 500,
+                      destinationType: Camera.DestinationType.DATA_URL,
+                      // In this app, dynamically set the picture source, Camera or photo gallery
+                      sourceType: srcType,
+                      encodingType: Camera.EncodingType.JPEG,
+                      mediaType: Camera.MediaType.PICTURE,
+                      allowEdit: false,
+                      correctOrientation: true  //Corrects Android orientation quirks
+                  }
+
+                  //var func = createNewFileEntry;
+
+                  navigator.camera.getPicture(function cameraSuccess(imageData) {
+                     
+                      self.image=imageData;
+                      //alert(imageData);
+                      self.$parent.$options.methods.goToSearchimg(imageData);
+                      // You may choose to copy the picture, save it somewhere, or upload.
+                      //func(imageUri);
+
+                  }, function cameraError(error) {
+                      console.debug("Unable to obtain picture: " + error, "app");
+
+                  }, options);
               }
               
         },
@@ -49,7 +115,7 @@ const FindTemplate = {props: {},
                 </md-button>
                 </div>
                 <div id="fimage">
-                  <md-button class="md-fab md-primary">
+                  <md-button class="md-fab md-primary" @click="showDialog = true">
                      <md-icon>camera_alt</md-icon>
                   </md-button>
                   <br>
@@ -71,7 +137,18 @@ const FindTemplate = {props: {},
                       </md-card>
                   </div>
                 </div>
-            </div>     
+
+                  <div>
+                    <md-dialog :md-active.sync="showDialog" class="md-alignment-top-center">
+                      <md-dialog-title>Camera</md-dialog-title>
+
+                        <md-button class="md-primary" @click.native="openCam()">Take a Picture</md-button>
+                        <md-button class="md-primary" @click.native="openGal()">Select from Gallery</md-button>
+
+                    </md-dialog>
+                  </div>
+            </div>  
+
         </div>
 `
                      };
