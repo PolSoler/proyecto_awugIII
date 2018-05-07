@@ -36,6 +36,7 @@ function init(){
             ,{path: '/movie_details:idm', name: 'moviedetails', component: MovieDetailsTemplate}
             ,{path: '/simplelist', name: 'simplelist', component: SimpleListTemplate}
             ,{path: '/buscar_img', name: 'buscar_img', component: buscar_img}
+            ,{path: '/searchtext', name: 'searchtext', component: searchtext}
             
             ];
 
@@ -84,6 +85,14 @@ function init(){
                     //alert(this.image);
                     image_new=img_src;
                     router.push({ name: 'buscar_img', params: {'img_src': image_new}});
+                },
+            showTextSearch: function(desc){
+                this.showNavigation = false;
+                    //this.$refs.sidebar.toggle();
+                    //console.log("id: "+idm);
+                    //alert(this.image);
+                    title=desc;
+                    router.push({ name: 'searchtext', params: {'desc': title}});
                 }
         }
             

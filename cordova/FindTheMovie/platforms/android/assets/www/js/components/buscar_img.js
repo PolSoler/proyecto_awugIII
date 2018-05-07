@@ -40,16 +40,20 @@ const buscar_img = {props: [],
 
                 },
             showresults: function(data){
-                //alert("TEST");
+                
                 this.spinner=false;
                 self=this;
                 for (i=0;i<data.responses[0].webDetection.webEntities.length;i++){
-                      self.results.push({
-                        "id":i,
-                        "desc":data.responses[0].webDetection.webEntities[i].description
-                      });
-                }
-                
+                        self.results.push({
+                            "id":i,
+                            "desc":data.responses[0].webDetection.webEntities[i].description
+                        });
+                } 
+            },
+
+            emitSearch(desc){
+
+                this.$parent.$options.methods.showTextSearch(desc)
             }  
 
 
@@ -60,10 +64,13 @@ const buscar_img = {props: [],
         template:`
         <div>
             <div id="main">
+                <md-toolbar class="md-primary"> 
+                    <h3 class="md-title">Image Results</h3>
+                </md-toolbar>
                     <md-progress-spinner class="md-primary" md-mode="indeterminate" v-if="spinner"></md-progress-spinner>
                     <md-list>
                         <div v-for="item in results" :key="results.id">
-                            <md-list-item>
+                            <md-list-item @click="emitSearch(item.desc)">
                             <span class="md-list-item-text">{{item.desc}}</span>
                             </md-list-item>
                             <md-divider class="md-inset"></md-divider>

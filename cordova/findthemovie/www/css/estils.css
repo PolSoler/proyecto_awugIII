@@ -220,3 +220,36 @@ md-bottom-bar-item{
 .md-progress-spinner{
 	margin-top: 20vh;
 }
+
+#textres{
+	width: 100%;
+	height: auto;
+}
+
+#textres .md-card{
+	vertical-align: top;
+	display: inline-block;
+	width: 31vw;
+	height: auto;
+	margin-left: 1vw;
+	margin-right: 1vw;
+	margin-top: 10px;
+}
+
+#textres .mtitle{
+	max-height: 37px;
+	height: auto;
+	white-space: pre-wrap;
+	display: inline-block;
+	vertical-align: middle;
+	text-overflow: ellipsis;
+	font-size: 14px;
+	line-height: 18px;
+	margin: auto;
+	margin-top: 3px;
+}
+
+#textres .md-card-header{
+	padding: 2px;
+	text-align: center;
+}

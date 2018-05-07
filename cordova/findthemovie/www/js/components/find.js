@@ -95,7 +95,16 @@ const FindTemplate = {props: {},
                       console.debug("Unable to obtain picture: " + error, "app");
 
                   }, options);
-              }
+              },
+              emitSearch(){
+                //alert(textsearch.value);
+                //if(textsearch.value=!""){
+                  this.$parent.$options.methods.showTextSearch(textsearch.value);
+                //}else{
+                //  alert("Please Insert Movie to Find");
+                //}
+                
+              }  
               
         },
         created: function () {
@@ -108,9 +117,9 @@ const FindTemplate = {props: {},
                 <div id="searchfield">
                 <md-field>
                   <label>Find movie by text</label>
-                  <md-input v-model="type"></md-input>
+                  <md-input v-model="type" id="textsearch"></md-input>
                 </md-field>
-                <md-button class="md-icon-button md-dense md-primary search">
+                <md-button class="md-icon-button md-dense md-primary search" @click="emitSearch()">
                   <md-icon>search</md-icon>
                 </md-button>
                 </div>
