@@ -48,8 +48,7 @@ const buscar_img = {props: [],
                         "id":i,
                         "desc":data.responses[0].webDetection.webEntities[i].description
                       });
-                }
-                
+                } 
             }  
 
 
